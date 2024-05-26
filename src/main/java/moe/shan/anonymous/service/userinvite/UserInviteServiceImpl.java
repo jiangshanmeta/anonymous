@@ -9,14 +9,15 @@ import java.util.List;
 
 @Service
 public class UserInviteServiceImpl implements UserInviteService {
-    private UserInviteRepository userInviteRepository;
+    private final UserInviteRepository userInviteRepository;
+
     public UserInviteServiceImpl(
             UserInviteRepository userInviteRepository
-    ){
+    ) {
         this.userInviteRepository = userInviteRepository;
     }
 
-    public List<UserInvite> findByUserId(ObjectId userId){
+    public List<UserInvite> findByUserId(ObjectId userId) {
         return userInviteRepository.findByUserId(userId);
     }
 }

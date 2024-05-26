@@ -11,15 +11,16 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    private UserInviteService userInviteService;
+    private final UserInviteService userInviteService;
+
     public UserController(
             UserInviteService userInviteService
-    ){
+    ) {
         this.userInviteService = userInviteService;
     }
 
     @GetMapping("my/inviteCodes")
-    public ResponseEntity<List<UserInvite>> myInviteCodes(){
+    public ResponseEntity<List<UserInvite>> myInviteCodes() {
         // TODO get userId hardcoded for now
 
         return ResponseEntity.ok(userInviteService.findByUserId(new ObjectId("5b03e10aaf7540e1f2cb18ed")));

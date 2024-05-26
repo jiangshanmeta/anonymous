@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface GenreStyleService {
     List<GenreStyle> findAll();
+
     Optional<GenreStyle> findById(String id);
 }

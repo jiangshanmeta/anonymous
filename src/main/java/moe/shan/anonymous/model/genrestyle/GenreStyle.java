@@ -40,24 +40,16 @@ public record GenreStyle(
 ) {
 
     public GenreStyle {
-        counterRefrence = OptionalUtil.ofNullable(counterRefrence,0);
-        counterRank = OptionalUtil.ofNullable(counterRank,0);
-        lastUpdated = OptionalUtil.ofNullable(lastUpdated,0.0);
-        quality = quality == null? GenreStyleQuality.NOT_MANUALLY_PROCESSED:quality;
-        parents = parents == null? Collections.emptyList():parents;
-        origins = origins == null? Collections.emptyList():origins;
-        contributeUser = contributeUser == null ? Collections.emptyList():contributeUser;
-        showInList = showInList == null ? Optional.of(false):showInList;
-        showInFront = showInFront == null? Optional.of(false):showInFront;
-        topArtists = topArtists == null? Collections.emptyList():topArtists;
-    }
-
-    public record FieldUser(@Id String _id){
-
-    }
-
-    public record FieldStyle(@Id String _id ){
-
+        counterRefrence = OptionalUtil.ofNullable(counterRefrence, 0);
+        counterRank = OptionalUtil.ofNullable(counterRank, 0);
+        lastUpdated = OptionalUtil.ofNullable(lastUpdated, 0.0);
+        quality = quality == null ? GenreStyleQuality.NOT_MANUALLY_PROCESSED : quality;
+        parents = parents == null ? Collections.emptyList() : parents;
+        origins = origins == null ? Collections.emptyList() : origins;
+        contributeUser = contributeUser == null ? Collections.emptyList() : contributeUser;
+        showInList = showInList == null ? Optional.of(false) : showInList;
+        showInFront = showInFront == null ? Optional.of(false) : showInFront;
+        topArtists = topArtists == null ? Collections.emptyList() : topArtists;
     }
 
     public enum GenreStyleQuality {
@@ -66,10 +58,19 @@ public record GenreStyle(
         LOCKED_IN_VOTING(2),
         LOCKED(3);
 
-        private Number value;
-        private GenreStyleQuality(Number value){
+        private final Number value;
+
+        GenreStyleQuality(Number value) {
             this.value = value;
         }
+
+    }
+
+    public record FieldUser(@Id String _id) {
+
+    }
+
+    public record FieldStyle(@Id String _id) {
 
     }
 
@@ -79,22 +80,17 @@ public record GenreStyle(
             @Field("primary_img") String primaryImg,
             @Field("begin_year") int beginYear,
             @Field("end_year") int endYear
-    ){
+    ) {
 
     }
 
 
-
-
-
-
-
-    public static class GenreStyleQualityConverter implements PropertyValueConverter<GenreStyleQuality,Number, ValueConversionContext<?>> {
+    public static class GenreStyleQualityConverter implements PropertyValueConverter<GenreStyleQuality, Number, ValueConversionContext<?>> {
 
         @Override
         public GenreStyleQuality read(Number value, ValueConversionContext<?> context) {
 
-            return Arrays.stream(GenreStyleQuality.values()).filter(item->item.value.intValue() == value.intValue()  ).findFirst().orElseGet(()-> GenreStyleQuality.NOT_MANUALLY_PROCESSED)   ;
+            return Arrays.stream(GenreStyleQuality.values()).filter(item -> item.value.intValue() == value.intValue()).findFirst().orElseGet(() -> GenreStyleQuality.NOT_MANUALLY_PROCESSED);
         }
 
         @Override

@@ -18,11 +18,11 @@ public record Chronicle(
         String desc,
         @Field("primary_img") String primaryImg,
         @DocumentReference(lookup = "{ '_id' : ?#{_id} }") List<FieldGenreStyle> styles,
-        @Field("user_created") @JsonSerialize(using= ToStringSerializer.class) ObjectId userCreated,
+        @Field("user_created") @JsonSerialize(using = ToStringSerializer.class) ObjectId userCreated,
         @Field("ts_updated") int tsUpdated,
         @Field("ts_created") int tsCreated,
         @Field("begin_year") int beginYear,
         @Field("end_year") int endYear
-        ) {
+) {
 
 }

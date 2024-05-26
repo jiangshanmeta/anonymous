@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface UserInviteRepository extends MongoRepository<UserInvite,String> {
+public interface UserInviteRepository extends MongoRepository<UserInvite, String> {
     List<UserInvite> findByUserId(ObjectId userId);
 }

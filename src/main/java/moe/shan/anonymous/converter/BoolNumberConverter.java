@@ -3,7 +3,7 @@ package moe.shan.anonymous.converter;
 import org.springframework.data.convert.PropertyValueConverter;
 import org.springframework.data.convert.ValueConversionContext;
 
-public class BoolNumberConverter implements PropertyValueConverter<Boolean,Number, ValueConversionContext<?>> {
+public class BoolNumberConverter implements PropertyValueConverter<Boolean, Number, ValueConversionContext<?>> {
 
     @Override
     public Boolean read(Number value, ValueConversionContext context) {
@@ -12,6 +12,6 @@ public class BoolNumberConverter implements PropertyValueConverter<Boolean,Numbe
 
     @Override
     public Number write(Boolean value, ValueConversionContext context) {
-        return value.booleanValue()? 1:0;
+        return value.booleanValue() ? 1 : 0;
     }
 }

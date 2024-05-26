@@ -13,16 +13,18 @@ public enum GenreStyleType {
     SUB_STYLE(4),
     SUB_SUB_STYLE(5);
 
-    private Number value;
-    private GenreStyleType(Number value){
+    private final Number value;
+
+    GenreStyleType(Number value) {
         this.value = value;
     }
-    public static class GenreStyleTypeConverter implements PropertyValueConverter<GenreStyleType,Number, ValueConversionContext<?>> {
+
+    public static class GenreStyleTypeConverter implements PropertyValueConverter<GenreStyleType, Number, ValueConversionContext<?>> {
 
         @Override
         public GenreStyleType read(Number value, ValueConversionContext<?> context) {
 
-            return Arrays.stream(GenreStyleType.values()).filter(item->item.value.intValue() == value.intValue()  ).findFirst().orElseGet(()-> GenreStyleType.UNASSIGNED)   ;
+            return Arrays.stream(GenreStyleType.values()).filter(item -> item.value.intValue() == value.intValue()).findFirst().orElseGet(() -> GenreStyleType.UNASSIGNED);
         }
 
         @Override

@@ -19,11 +19,18 @@ public record User(
         String phone,
         @Field("reg_ts") int regTS,
         @JsonIgnore String password,
-        @ValueConverter(UserTypeConverter.class)  UserType type,
+        @ValueConverter(UserTypeConverter.class) UserType type,
         @Field("counter_contribute") Optional<Integer> counterContribute,
         @Field("counter_view") Optional<Integer> counterView,
         @Field("hot_index") Optional<Integer> hotIndex
 ) {
+    public User {
+        counterContribute = OptionalUtil.ofNullable(counterContribute, 0);
+        counterView = OptionalUtil.ofNullable(counterView, 0);
+        hotIndex = OptionalUtil.ofNullable(hotIndex, 0);
+
+    }
+
     public enum UserType {
         User(0),
         EDITOR(1),
@@ -31,30 +38,23 @@ public record User(
         EDITOR_CHIEF(3),
         Neuromancer(4);
         private final Number value;
-        private UserType(Number value){
+
+        UserType(Number value) {
             this.value = value;
         }
 
     }
 
-    public static class UserTypeConverter implements PropertyValueConverter<UserType,Number, ValueConversionContext<?>> {
+    public static class UserTypeConverter implements PropertyValueConverter<UserType, Number, ValueConversionContext<?>> {
 
         @Override
         public UserType read(Number value, ValueConversionContext<?> context) {
-            return Arrays.stream(UserType.values()).filter(item->item.value.intValue() == value.intValue() ).findFirst().orElseGet(()-> UserType.User)   ;
+            return Arrays.stream(UserType.values()).filter(item -> item.value.intValue() == value.intValue()).findFirst().orElseGet(() -> UserType.User);
         }
 
         @Override
         public Number write(UserType value, ValueConversionContext<?> context) {
             return value.value;
         }
-    }
-
-
-    public User {
-        counterContribute = OptionalUtil.ofNullable(counterContribute,0);
-        counterView = OptionalUtil.ofNullable(counterView,0);
-        hotIndex = OptionalUtil.ofNullable(hotIndex,0);
-
     }
 }

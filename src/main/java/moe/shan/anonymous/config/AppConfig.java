@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @Configuration
 @EnableMongoRepositories("moe.shan.anonymous")
-public class AppConfig   {
+public class AppConfig {
 
 }
